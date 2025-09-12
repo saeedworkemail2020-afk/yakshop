@@ -4,9 +4,8 @@ import 'package:amozeshyar/Featuers/Interaction/Interaction_view.dart';
 import 'package:amozeshyar/Featuers/Splashscreen/splashscreen_controller.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class SplashscreenView extends StatefulWidget {
-  SplashscreenView({super.key});
+  const SplashscreenView({super.key});
 
   @override
   State<SplashscreenView> createState() => _SplashscreenViewState();

@@ -1,15 +1,16 @@
 import 'package:amozeshyar/Core/screen_size.dart';
+import 'package:amozeshyar/Featuers/Interaction/interaction_controller.dart';
 import 'package:amozeshyar/Featuers/Splashscreen/splashscreen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final interaction = InteractionController();
   @override
   Widget build(BuildContext context) {
     ScreenSize().getScreenSize(

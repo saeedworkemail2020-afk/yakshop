@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:amozeshyar/Featuers/Interaction/Interaction_controller.dart';
 
 class InteractionView extends StatefulWidget {
   const InteractionView({super.key});
@@ -7,9 +8,12 @@ class InteractionView extends StatefulWidget {
   State<InteractionView> createState() => _InteractionViewState();
 }
 
+final model = InteractionController().model;
+final controller = InteractionController();
+
 class _InteractionViewState extends State<InteractionView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(key: model.Interactionscaffoldkey);
   }
 }

@@ -100,7 +100,6 @@ class _InteractionViewState extends State<InteractionView> {
                       ),
                       child: TextFormField(
                         cursorColor: Colors.orange,
-                        obscureText: model.hidepassword.value,
                         controller: model.skintext,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(

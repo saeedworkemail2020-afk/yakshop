@@ -12,7 +12,6 @@ class Interactionservices {
       //    request.body=jsonEncode(params);
       //    request.headers['Content-Type']="application/json";
       //  var response=await http.Client().send(request);
-      var uri = Uri.parse("http://saeedapk.ir/api/user/login");
       var response = (await http.get(uri));
       var username = jsonDecode(response.body);
       print(username);

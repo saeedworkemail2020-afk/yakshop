@@ -14,6 +14,188 @@ final controller = InteractionController();
 class _InteractionViewState extends State<InteractionView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(key: model.Interactionscaffoldkey);
+    return Scaffold(
+      key: model.interactionscaffoldkey,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: controller.screenSize.height * 0.025,
+                  bottom: controller.screenSize.height * 0.025,
+                ),
+                child: Center(child: Text('Total Amount')),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [Text("Milk:100"), Text('Skin:80')],
+              ),
+              Form(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: controller.screenSize.height * 0.025),
+                    // Username TextField
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: controller.screenSize.width * 0.06,
+                        right: controller.screenSize.width * 0.06,
+                      ),
+                      child: TextFormField(
+                        cursorColor: Colors.orange,
+                        controller: model.usernametext,
+                        focusNode: model.milknode,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          hintText: "User Name",
+                          hintTextDirection: TextDirection.ltr,
+                          hintStyle: TextStyle(
+                            fontSize: controller.screenSize.fieldtextsize,
+                          ),
+                          filled: true,
+                          fillColor: Colors.black12,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          prefixIcon: const Icon(Icons.person),
+                        ),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ),
+                    SizedBox(height: controller.screenSize.height * 0.01),
+                    // Milk TextField
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: controller.screenSize.width * 0.06,
+                        right: controller.screenSize.width * 0.06,
+                      ),
+                      child: TextFormField(
+                        cursorColor: Colors.orange,
+                        controller: model.milktext,
+                        focusNode: model.skinnode,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "Milk",
+                          hintTextDirection: TextDirection.ltr,
+                          hintStyle: TextStyle(
+                            fontSize: controller.screenSize.fieldtextsize,
+                          ),
+                          filled: true,
+                          fillColor: Colors.black12,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          prefixIcon: const Icon(Icons.water_drop_sharp),
+                        ),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ),
+                    SizedBox(height: controller.screenSize.height * 0.01),
+                    //  skin TextField
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: controller.screenSize.width * 0.06,
+                        right: controller.screenSize.width * 0.06,
+                      ),
+                      child: TextFormField(
+                        cursorColor: Colors.orange,
+                        obscureText: model.hidepassword.value,
+                        controller: model.skintext,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "Skin",
+                          hintStyle: TextStyle(
+                            fontSize: controller.screenSize.fieldtextsize,
+                          ),
+                          hintTextDirection: TextDirection.ltr,
+                          filled: true,
+                          fillColor: Colors.black12,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          prefixIcon: Icon(Icons.assessment_sharp),
+                        ),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ),
+                    SizedBox(height: controller.screenSize.height * 0.01),
+
+                    // send button
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(
+                          Colors.lightBlue,
+                        ),
+                        fixedSize: WidgetStateProperty.all(
+                          Size(
+                            controller.screenSize.height * 0.3,
+                            controller.screenSize.height * 0.06,
+                          ),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        shadowColor: WidgetStateProperty.all(Colors.blue),
+                        elevation: WidgetStateProperty.all(5),
+                      ),
+                      onPressed: () async {},
+                      child: Text(
+                        "Send",
+                        style: TextStyle(
+                          fontSize: controller.screenSize.buttonfontsize,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: controller.screenSize.height * 0.01),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: controller.screenSize.width * 0.05,
+                    height: controller.screenSize.height * 0.08,
+                  ),
+                  Text("Yaks List:"),
+                ],
+              ),
+              SizedBox(
+                width: controller.screenSize.width * 0.8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [Text("Name"), Text("Age"), Text("Last Shaved")],
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(
+                  top: controller.screenSize.height * 0.01,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.blueGrey,
+                  ),
+                  width: controller.screenSize.width * 0.9,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("yeti", style: TextStyle(color: Colors.white)),
+                      Text("18", style: TextStyle(color: Colors.white)),
+                      Text("6", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

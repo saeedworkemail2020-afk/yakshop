@@ -6,7 +6,6 @@ class Interactionservices {
   void getdata() async {
     // var controller=Signcontroller();
     // var params = {"username": username, "password": password};
-    //  const  uri="http://saeedapk.ir/api/user/login";
     try {
       //    var request= http.Request('GET',Uri.parse(uri));
       //    request.body=jsonEncode(params);

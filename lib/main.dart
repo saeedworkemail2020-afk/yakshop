@@ -1,5 +1,6 @@
 import 'package:amozeshyar/Core/screen_size.dart';
 import 'package:amozeshyar/Featuers/Interaction/interaction_controller.dart';
+import 'package:amozeshyar/Featuers/Interaction/interaction_view.dart';
 import 'package:amozeshyar/Featuers/Splashscreen/splashscreen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       MediaQuery.of(context).size.width,
       MediaQuery.of(context).size.height,
     );
+    // return GetMaterialApp(home: InteractionView());
     return GetMaterialApp(home: SplashscreenView());
   }
 }

@@ -11,13 +11,22 @@ class Interactionservices {
       //    request.body=jsonEncode(params);
       //    request.headers['Content-Type']="application/json";
       //  var response=await http.Client().send(request);
-      var response = (await http.get(uri));
-      var username = jsonDecode(response.body);
-      print(username);
-      print("++++++==========+++++++");
+      Uri uri = Uri.parse('https://e8f417133b1b.ngrok-free.app/health');
+      print("++++++==========+++++++1");
+
+      var response = await http.get(uri);
+      print("++++++==========+++++++2");
+      print(">>>${response.body}");
+      var username = jsonEncode(response.body);
+      print("++++++==========+++++++3");
+
+      print(">>>${username}");
+      print("++++++==========+++++++4");
       //  print(response.request);
     } catch (e) {
-      print("exsption: $e");
+      print("++++++==========++++++33+");
+
+      // print("exsption: $e");
     }
   }
 }

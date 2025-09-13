@@ -13,16 +13,11 @@ class SplashscreenView extends StatefulWidget {
 
 class _SplashscreenViewState extends State<SplashscreenView> {
   final controller = SplashscreenController();
+  final model = SplashscreenController().model;
   @override
   void initState() {
     super.initState();
-
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => InteractionView()),
-      );
-    });
+    model.navigate();
   }
 
   @override

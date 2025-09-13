@@ -13,6 +13,13 @@ final controller = InteractionController();
 
 class _InteractionViewState extends State<InteractionView> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.services.getdata();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: model.interactionscaffoldkey,

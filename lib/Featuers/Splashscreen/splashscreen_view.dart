@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:amozeshyar/Featuers/Interaction/interaction_view.dart';
 import 'package:amozeshyar/Featuers/Splashscreen/splashscreen_controller.dart';
 import 'package:flutter/material.dart';
 

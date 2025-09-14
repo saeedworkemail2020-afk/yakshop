@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 
 class SplashscreenServices {
+  Uri uri;
+  SplashscreenServices(this.uri);
   Future<bool> connectioncheck() async {
     try {
-      Uri uri = Uri.parse('https://e8f417133b1b.ngrok-free.app/health');
       var response = await http.get(uri);
       bool result;
       if (response.body == 'OK') {

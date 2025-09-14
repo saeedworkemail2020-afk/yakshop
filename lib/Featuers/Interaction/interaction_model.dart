@@ -17,7 +17,7 @@ class InteractionModel extends GetxController {
   late FocusNode namenode;
   late FocusNode agenode;
   late FocusNode gendernode;
-
+  //vars
   InteractionModel() {
     interactionscaffoldkey = GlobalKey<ScaffoldState>();
 

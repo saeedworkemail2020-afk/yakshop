@@ -1,32 +1,29 @@
 import 'dart:convert';
 
+import 'package:amozeshyar/Featuers/Interaction/Services/service_stok.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class Interactionservices {
-  void getdata() async {
-    // var controller=Signcontroller();
-    // var params = {"username": username, "password": password};
+  RxString milk = "0".obs;
+  RxString skins = "0".obs;
+
+  String baseuri;
+  Interactionservices(this.baseuri);
+  Future getstock({required days}) async {
     try {
-      //    var request= http.Request('GET',Uri.parse(uri));
-      //    request.body=jsonEncode(params);
-      //    request.headers['Content-Type']="application/json";
-      //  var response=await http.Client().send(request);
-      Uri uri = Uri.parse('https://e8f417133b1b.ngrok-free.app/health');
-      print("++++++==========+++++++1");
-
+      Uri uri = Uri.parse("$baseuri$days");
+      print("======started======>");
       var response = await http.get(uri);
-      print("++++++==========+++++++2");
-      print(">>>${response.body}");
-      var username = jsonEncode(response.body);
-      print("++++++==========+++++++3");
 
-      print(">>>${username}");
-      print("++++++==========+++++++4");
-      //  print(response.request);
+      var result = jsonDecode(response.body);
+      milk.value = ServiceStok(amount: result).milk.toString();
+      skins.value = ServiceStok(amount: result).skins.toString();
+      print("<====ended========");
     } catch (e) {
-      print("++++++==========++++++33+");
+      print("<======+++erorr+++======");
 
-      // print("exsption: $e");
+      print(e);
     }
   }
 }

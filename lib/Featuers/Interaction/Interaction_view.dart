@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:amozeshyar/Featuers/Interaction/Interaction_controller.dart';
+import 'package:get/get.dart';
 
 class InteractionView extends StatefulWidget {
   const InteractionView({super.key});
@@ -8,14 +9,13 @@ class InteractionView extends StatefulWidget {
   State<InteractionView> createState() => _InteractionViewState();
 }
 
-final model = InteractionController().model;
 final controller = InteractionController();
+final model = controller.model;
 
 class _InteractionViewState extends State<InteractionView> {
   @override
   void initState() {
     super.initState();
-    controller.services.getdata();
   }
 
   @override
@@ -29,7 +29,10 @@ class _InteractionViewState extends State<InteractionView> {
               Center(child: Text('Total Amount')),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [Text("Milk:100"), Text('Skin:80')],
+                children: [
+                  Obx(() => Text("milk:${controller.services.milk.value}")),
+                  Obx(() => Text("skins:${controller.services.skins.value}")),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
@@ -55,7 +58,11 @@ class _InteractionViewState extends State<InteractionView> {
                         shadowColor: WidgetStateProperty.all(Colors.brown),
                         elevation: WidgetStateProperty.all(5),
                       ),
-                      onPressed: () async {},
+                      onPressed: () {
+                        controller.services.getstock(
+                          days: model.getamoundtext.text,
+                        );
+                      },
                       child: Text(
                         "Send",
                         style: TextStyle(
@@ -67,12 +74,12 @@ class _InteractionViewState extends State<InteractionView> {
                     ),
                     SizedBox(width: controller.screenSize.width * 0.01),
                     SizedBox(
-                      width: controller.screenSize.width * 0.12,
+                      width: controller.screenSize.width * 0.20,
                       height: controller.screenSize.width * 0.1,
                       child: TextField(
                         cursorColor: Colors.orange,
                         controller: model.getamoundtext,
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: "Day",
                           hintTextDirection: TextDirection.ltr,

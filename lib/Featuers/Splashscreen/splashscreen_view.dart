@@ -8,9 +8,10 @@ class SplashscreenView extends StatefulWidget {
   State<SplashscreenView> createState() => _SplashscreenViewState();
 }
 
+final controller = SplashscreenController();
+final model = controller.model;
+
 class _SplashscreenViewState extends State<SplashscreenView> {
-  final controller = SplashscreenController();
-  final model = SplashscreenController().model;
   @override
   void initState() {
     super.initState();

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:amozeshyar/Featuers/Interaction/Services/service_stok.dart';
+import 'package:amozeshyar/Featuers/Interaction/Services/service_stock.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 

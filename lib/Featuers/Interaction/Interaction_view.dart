@@ -357,7 +357,11 @@ class _InteractionViewState extends State<InteractionView> {
                       shadowColor: WidgetStateProperty.all(Colors.red),
                       elevation: WidgetStateProperty.all(5),
                     ),
-                    onPressed: () async {},
+                    onPressed: () {
+                      controller.services.getherd(
+                        days: model.getyakslisttext.text,
+                      );
+                    },
                     child: Text(
                       "Send",
                       style: TextStyle(
@@ -369,12 +373,12 @@ class _InteractionViewState extends State<InteractionView> {
                   ),
                   SizedBox(width: controller.screenSize.width * 0.01),
                   SizedBox(
-                    width: controller.screenSize.width * 0.12,
+                    width: controller.screenSize.width * 0.20,
                     height: controller.screenSize.width * 0.1,
                     child: TextField(
                       cursorColor: Colors.orange,
                       controller: model.getyakslisttext,
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: "Day",
                         hintTextDirection: TextDirection.ltr,
@@ -398,7 +402,6 @@ class _InteractionViewState extends State<InteractionView> {
                     width: controller.screenSize.width * 0.05,
                     height: controller.screenSize.height * 0.08,
                   ),
-
                   Text("Yaks List:"),
                 ],
               ),
@@ -409,27 +412,61 @@ class _InteractionViewState extends State<InteractionView> {
                   children: [Text("Name"), Text("Age"), Text("Last Shaved")],
                 ),
               ),
-
-              Padding(
-                padding: EdgeInsets.only(
-                  top: controller.screenSize.height * 0.01,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.blueGrey,
-                  ),
-                  width: controller.screenSize.width * 0.9,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text("yeti", style: TextStyle(color: Colors.white)),
-                      Text("18", style: TextStyle(color: Colors.white)),
-                      Text("6", style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                ),
-              ),
+              Obx(() {
+                return controller.services.herd.isNotEmpty
+                    ? SizedBox(
+                      height: controller.screenSize.height * 0.4,
+                      child: ListView.builder(
+                        itemCount: controller.services.herd.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              top: controller.screenSize.height * 0.01,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.blueGrey,
+                              ),
+                              width: controller.screenSize.width * 0.9,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    controller.services.herd[index].name,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    controller.services.herd[index].age
+                                        .toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    controller.services.herd[index].shaved
+                                        .toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                    : Padding(
+                      padding: EdgeInsets.only(
+                        top: controller.screenSize.height * 0.02,
+                      ),
+                      child: Center(
+                        child: SizedBox(
+                          width: 100,
+                          height: 50,
+                          child: Text("is empty!"),
+                        ),
+                      ),
+                    );
+              }),
             ],
           ),
         ),

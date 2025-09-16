@@ -11,7 +11,10 @@ class InteractionController {
   InteractionController() {
     _screenSize = ScreenSize();
     _model = InteractionModel();
-    _services = Interactionservices(ServiceConfig.basestockUri);
+    _services = Interactionservices(
+      basestockUri: ServiceConfig.basestockUri,
+      baseherdUri: ServiceConfig.baseherdUri,
+    );
   }
   ScreenSize get screenSize => _screenSize;
   InteractionModel get model => _model;

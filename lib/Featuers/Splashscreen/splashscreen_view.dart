@@ -21,6 +21,7 @@ class _SplashscreenViewState extends State<SplashscreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: model.Splashscreenscaffoldkey,
       body: Stack(
         children: [
           Container(

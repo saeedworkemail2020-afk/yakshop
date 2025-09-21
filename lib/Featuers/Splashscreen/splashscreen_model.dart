@@ -11,9 +11,8 @@ class SplashscreenModel extends GetxController {
     Splashscreenscaffoldkey = GlobalKey<ScaffoldState>();
   }
   late SplashscreenController controller = SplashscreenController();
-  bool result = false; //changed
   Future<void> navigate() async {
-    result = await controller.services.connectioncheck();
+    bool result = await controller.services.connectioncheck();
     await Future.delayed(Duration(seconds: 3));
     if (result == true) {
       controller.snackBar.showSnackBar(

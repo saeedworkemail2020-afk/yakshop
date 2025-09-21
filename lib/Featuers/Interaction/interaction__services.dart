@@ -26,7 +26,7 @@ class Interactionservices {
   Future getherd({required days}) async {
     try {
       Uri uri = Uri.parse("$baseherdUri$days");
-      // print("======started======>");
+      print("======started======>");
       var response = await http.get(uri);
       var result = jsonDecode(response.body);
       herd.value = [];
@@ -34,9 +34,9 @@ class Interactionservices {
       for (var yak in result['herd']) {
         herd.add(ServiceHerd.fromjson(yak));
       }
-      // print("<====ended========");
+      print("<====ended========");
     } catch (e) {
-      // print("<======+++erorr+++======");
+      print("<======+++erorr+++======");
       print(e);
     }
   }

@@ -1,19 +1,31 @@
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class SplashscreenServices {
   Uri uri;
+  String message = '';
   SplashscreenServices(this.uri);
+  //for unit test
+  // ignore: prefer_typing_uninitialized_variables
+  // var response;
   Future<bool> connectioncheck() async {
+    message = '';
     try {
       var response = await http.get(uri);
       bool result;
+      print("==============>");
+      print(response.statusCode);
       if (response.body == 'OK') {
         result = true;
+        message = "${response.body}:connected to server";
       } else {
+        message = "${response.statusCode}:not connected to server";
+
         result = false;
       }
       return result;
     } catch (e) {
+      message = "${e.hashCode}:erorr in connection ";
       return false;
     }
   }

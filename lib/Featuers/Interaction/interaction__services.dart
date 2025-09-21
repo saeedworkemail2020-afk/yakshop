@@ -30,11 +30,6 @@ class Interactionservices {
       var response = await http.get(uri);
       var result = jsonDecode(response.body);
       herd.value = [];
-      print("<===============>");
-
-      print(DataModeleHerd.fromjson(result['herd'][0]).name);
-      print("<===============>");
-      print(result['herd'][0]);
       for (var yak in result['herd']) {
         herd.add(DataModeleHerd.fromjson(yak));
       }

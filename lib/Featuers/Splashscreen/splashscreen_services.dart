@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class SplashscreenServices {
@@ -13,8 +12,7 @@ class SplashscreenServices {
     try {
       var response = await http.get(uri);
       bool result;
-      print("==============>");
-      print(response.statusCode);
+
       if (response.body == 'OK') {
         result = true;
         message = "${response.body}:connected to server";

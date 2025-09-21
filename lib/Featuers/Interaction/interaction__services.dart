@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class Interactionservices {
   RxString milk = "0".obs;
   RxString skins = "0".obs;
-  RxList<ServiceHerd> herd = <ServiceHerd>[].obs;
+  RxList<DataModeleHerd> herd = <DataModeleHerd>[].obs;
   String basestockUri, baseherdUri;
   Interactionservices({required this.basestockUri, required this.baseherdUri});
   Future getstock({required days}) async {
@@ -16,8 +16,8 @@ class Interactionservices {
       var response = await http.get(uri);
 
       var result = jsonDecode(response.body);
-      milk.value = ServiceStok(amount: result).milk.toString();
-      skins.value = ServiceStok(amount: result).skins.toString();
+      milk.value = DataModelStok(amount: result).milk.toString();
+      skins.value = DataModelStok(amount: result).skins.toString();
     } catch (e) {
       print(e);
     }
@@ -30,9 +30,13 @@ class Interactionservices {
       var response = await http.get(uri);
       var result = jsonDecode(response.body);
       herd.value = [];
+      print("<===============>");
 
+      print(DataModeleHerd.fromjson(result['herd'][0]).name);
+      print("<===============>");
+      print(result['herd'][0]);
       for (var yak in result['herd']) {
-        herd.add(ServiceHerd.fromjson(yak));
+        herd.add(DataModeleHerd.fromjson(yak));
       }
       print("<====ended========");
     } catch (e) {

@@ -109,6 +109,34 @@ class _InteractionViewState extends State<InteractionView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Day TextField
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: controller.screenSize.width * 0.06,
+                        right: controller.screenSize.width * 0.06,
+                      ),
+                      child: TextFormField(
+                        cursorColor: Colors.orange,
+                        controller: model.getdayordertext,
+                        focusNode: model.milknode,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "Day",
+                          hintTextDirection: TextDirection.ltr,
+                          hintStyle: TextStyle(
+                            fontSize: controller.screenSize.fieldtextsize,
+                          ),
+                          filled: true,
+                          fillColor: Colors.black12,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          prefixIcon: const Icon(Icons.sunny),
+                        ),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ),
+                    SizedBox(height: controller.screenSize.height * 0.01),
                     // Milk TextField
                     Padding(
                       padding: EdgeInsets.only(

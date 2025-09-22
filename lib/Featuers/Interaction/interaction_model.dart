@@ -12,6 +12,7 @@ class InteractionModel extends GetxController {
   late TextEditingController gendertext;
   late TextEditingController getamoundtext;
   late TextEditingController getyakslisttext;
+  late TextEditingController getdayordertext;
   late FocusNode milknode;
   late FocusNode skinnode;
   late FocusNode namenode;
@@ -29,6 +30,7 @@ class InteractionModel extends GetxController {
     gendertext = TextEditingController();
     getamoundtext = TextEditingController();
     getyakslisttext = TextEditingController();
+    getdayordertext = TextEditingController();
     milknode = FocusNode();
     skinnode = FocusNode();
     namenode = FocusNode();

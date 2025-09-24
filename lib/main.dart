@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       MediaQuery.of(context).size.width,
       MediaQuery.of(context).size.height,
     );
-    // return GetMaterialApp(home: InteractionView());
-    return GetMaterialApp(home: SplashscreenView());
+    return GetMaterialApp(home: InteractionView());
+    // return GetMaterialApp(home: SplashscreenView());
   }
 }

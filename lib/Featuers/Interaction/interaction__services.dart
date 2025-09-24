@@ -64,16 +64,16 @@ class Interactionservices {
           scaffoldkey.currentState!.context,
           Colors.green,
         );
+        herd.value = [];
+        for (var yak in result['herd']) {
+          herd.add(DataModeleHerd.fromjson(yak));
+        }
       } else {
         controller.snackBar.showSnackBar(
           'Herd not received successfully',
           scaffoldkey.currentState!.context,
           Colors.orange,
         );
-        herd.value = [];
-        for (var yak in result['herd']) {
-          herd.add(DataModeleHerd.fromjson(yak));
-        }
       }
     } catch (e) {
       controller.snackBar.showSnackBar(
@@ -131,18 +131,11 @@ class Interactionservices {
     required String gender,
   }) async {
     try {
-      final params = '''
-<herd>
-    <labyak name="$name" age="$age" sex="$gender"/>
-</herd>
-  ''';
-      // print(params);
-
+      final params =
+          "<herd><labyak name='$name' age='$age' sex='$gender'/></herd>";
       Uri uri = Uri.parse(baseloadUri);
 
       var response = await http.post(uri, body: params);
-      print(response.statusCode);
-      print(response.body);
       if (response.statusCode == 205) {
         controller.snackBar.showSnackBar(
           'order sent successfully',
@@ -168,7 +161,6 @@ class Interactionservices {
         scaffoldkey.currentState!.context,
         Colors.red,
       );
-      print(e);
     }
   }
 }

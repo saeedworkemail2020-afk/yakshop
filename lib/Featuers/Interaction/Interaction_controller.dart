@@ -17,6 +17,7 @@ class InteractionController {
       basestockUri: ServiceConfig.basestockUri,
       baseherdUri: ServiceConfig.baseherdUri,
       baseorderUri: ServiceConfig.baseorderUri,
+      baseloadUri: ServiceConfig.baseloadUri,
       scaffoldkey: _model.interactionscaffoldkey,
     );
     _snackbarModel = SnackbarModel();

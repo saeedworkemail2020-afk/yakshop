@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +11,6 @@ class InteractionModel extends GetxController {
   late TextEditingController skintext;
   late TextEditingController nametext;
   late TextEditingController agetext;
-  late TextEditingController gendertext;
   late TextEditingController getamoundtext;
   late TextEditingController getyakslisttext;
   late TextEditingController getdayordertext;
@@ -17,7 +18,6 @@ class InteractionModel extends GetxController {
   late FocusNode skinnode;
   late FocusNode namenode;
   late FocusNode agenode;
-  late FocusNode gendernode;
   //vars
   InteractionModel() {
     interactionscaffoldkey = GlobalKey<ScaffoldState>();
@@ -27,7 +27,6 @@ class InteractionModel extends GetxController {
     skintext = TextEditingController();
     nametext = TextEditingController();
     agetext = TextEditingController();
-    gendertext = TextEditingController();
     getamoundtext = TextEditingController();
     getyakslisttext = TextEditingController();
     getdayordertext = TextEditingController();
@@ -35,6 +34,6 @@ class InteractionModel extends GetxController {
     skinnode = FocusNode();
     namenode = FocusNode();
     agenode = FocusNode();
-    gendernode = FocusNode();
   }
+  RxString gender = 'f'.obs;
 }

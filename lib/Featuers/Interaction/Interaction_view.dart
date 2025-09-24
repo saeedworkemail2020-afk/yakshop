@@ -281,7 +281,6 @@ class _InteractionViewState extends State<InteractionView> {
                       child: TextFormField(
                         cursorColor: Colors.orange,
                         controller: model.agetext,
-                        focusNode: model.gendernode,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: "Age",
@@ -300,30 +299,45 @@ class _InteractionViewState extends State<InteractionView> {
                       ),
                     ),
                     SizedBox(height: controller.screenSize.height * 0.01),
-                    //  Gender TextField
+                    //  Gender radoio button
                     Padding(
                       padding: EdgeInsets.only(
                         left: controller.screenSize.width * 0.06,
                         right: controller.screenSize.width * 0.06,
                       ),
-                      child: TextFormField(
-                        cursorColor: Colors.orange,
-                        controller: model.gendertext,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: "Gender",
-                          hintStyle: TextStyle(
-                            fontSize: controller.screenSize.fieldtextsize,
-                          ),
-                          hintTextDirection: TextDirection.ltr,
-                          filled: true,
-                          fillColor: Colors.black12,
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          prefixIcon: Icon(Icons.groups_3),
+                      child: Obx(
+                        () => Row(
+                          children: [
+                            SizedBox(
+                              height: controller.screenSize.height * 0.06,
+                              width: controller.screenSize.width * 0.4,
+                              child: ListTile(
+                                title: const Text('Male'),
+                                leading: Radio(
+                                  value: "m",
+                                  groupValue: model.gender.value,
+                                  onChanged: (value) {
+                                    model.gender.value = value.toString();
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: controller.screenSize.height * 0.06,
+                              width: controller.screenSize.width * 0.45,
+                              child: ListTile(
+                                title: const Text('Female'),
+                                leading: Radio(
+                                  value: "f",
+                                  groupValue: model.gender.value,
+                                  onChanged: (value) {
+                                    model.gender.value = value.toString();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        textInputAction: TextInputAction.next,
                       ),
                     ),
                     SizedBox(height: controller.screenSize.height * 0.01),
@@ -348,7 +362,13 @@ class _InteractionViewState extends State<InteractionView> {
                         shadowColor: WidgetStateProperty.all(Colors.green),
                         elevation: WidgetStateProperty.all(5),
                       ),
-                      onPressed: () async {},
+                      onPressed: () {
+                        controller.services.postload(
+                          name: model.nametext.text,
+                          age: int.parse(model.agetext.text),
+                          gender: model.gender.value,
+                        );
+                      },
                       child: Text(
                         "Send",
                         style: TextStyle(

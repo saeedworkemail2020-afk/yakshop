@@ -12,11 +12,12 @@ class Interactionservices {
   RxList<DataModeleHerd> herd = <DataModeleHerd>[].obs;
   late GlobalKey<ScaffoldState> scaffoldkey;
 
-  String basestockUri, baseherdUri, baseorderUri;
+  String basestockUri, baseherdUri, baseorderUri, baseloadUri;
   Interactionservices({
     required this.basestockUri,
     required this.baseherdUri,
     required this.baseorderUri,
+    required this.baseloadUri,
     required this.scaffoldkey,
   });
   Future getstock({required days}) async {
@@ -56,10 +57,6 @@ class Interactionservices {
 
       var response = await http.get(uri);
       var result = jsonDecode(response.body);
-      herd.value = [];
-      for (var yak in result['herd']) {
-        herd.add(DataModeleHerd.fromjson(yak));
-      }
 
       if (response.statusCode == 200) {
         controller.snackBar.showSnackBar(
@@ -73,6 +70,10 @@ class Interactionservices {
           scaffoldkey.currentState!.context,
           Colors.orange,
         );
+        herd.value = [];
+        for (var yak in result['herd']) {
+          herd.add(DataModeleHerd.fromjson(yak));
+        }
       }
     } catch (e) {
       controller.snackBar.showSnackBar(
@@ -121,6 +122,53 @@ class Interactionservices {
         scaffoldkey.currentState!.context,
         Colors.red,
       );
+    }
+  }
+
+  Future postload({
+    required String name,
+    required int age,
+    required String gender,
+  }) async {
+    try {
+      final params = '''
+<herd>
+    <labyak name="$name" age="$age" sex="$gender"/>
+</herd>
+  ''';
+      // print(params);
+
+      Uri uri = Uri.parse(baseloadUri);
+
+      var response = await http.post(uri, body: params);
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode == 205) {
+        controller.snackBar.showSnackBar(
+          'order sent successfully',
+          scaffoldkey.currentState!.context,
+          Colors.green,
+        );
+      } else if (response.statusCode == 400) {
+        controller.snackBar.showSnackBar(
+          '400:bad request,chech your data',
+          scaffoldkey.currentState!.context,
+          Colors.yellow,
+        );
+      } else {
+        controller.snackBar.showSnackBar(
+          'error in sending order',
+          scaffoldkey.currentState!.context,
+          Colors.orange,
+        );
+      }
+    } catch (e) {
+      controller.snackBar.showSnackBar(
+        'error in sending order',
+        scaffoldkey.currentState!.context,
+        Colors.red,
+      );
+      print(e);
     }
   }
 }

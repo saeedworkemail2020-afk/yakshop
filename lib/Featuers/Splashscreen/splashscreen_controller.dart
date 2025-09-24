@@ -3,7 +3,6 @@ import 'package:amozeshyar/Core/service_config.dart';
 import 'package:amozeshyar/Core/snackbarmodel.dart';
 import 'package:amozeshyar/Featuers/Splashscreen/splashscreen_model.dart';
 import 'package:amozeshyar/Featuers/Splashscreen/splashscreen_services.dart';
-import 'package:flutter/material.dart';
 
 class SplashscreenController {
   late ScreenSize _screenSize;

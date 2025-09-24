@@ -213,7 +213,13 @@ class _InteractionViewState extends State<InteractionView> {
                         shadowColor: WidgetStateProperty.all(Colors.blue),
                         elevation: WidgetStateProperty.all(5),
                       ),
-                      onPressed: () async {},
+                      onPressed: () {
+                        controller.services.postorder(
+                          days: model.getdayordertext.text,
+                          milk: double.parse(model.milktext.text),
+                          skins: int.parse(model.skintext.text),
+                        );
+                      },
                       child: Text(
                         "Send",
                         style: TextStyle(

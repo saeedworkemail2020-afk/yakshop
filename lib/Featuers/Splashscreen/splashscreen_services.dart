@@ -3,14 +3,16 @@ import 'package:http/http.dart' as http;
 class SplashscreenServices {
   Uri uri;
   String message = '';
-  SplashscreenServices(this.uri);
+  late final http.Client client;
+  SplashscreenServices(this.uri, {http.Client? client})
+    : client = client ?? http.Client();
   //for unit test
   // ignore: prefer_typing_uninitialized_variables
   // var response;
   Future<bool> connectioncheck() async {
     message = '';
     try {
-      var response = await http.get(uri);
+      var response = await client.get(uri);
       bool result;
 
       if (response.body == 'OK') {

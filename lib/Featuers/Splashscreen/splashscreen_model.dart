@@ -19,16 +19,16 @@ class SplashscreenModel extends GetxController {
     if (result == true) {
       controller.snackBar.showSnackBar(
         controller.services.message,
-        Splashscreenscaffoldkey.currentState!.context,
         Colors.green,
+        Splashscreenscaffoldkey.currentState!.context,
       );
       Get.off(InteractionView());
     }
     if (result == false) {
       controller.snackBar.showSnackBar(
         controller.services.message,
-        Splashscreenscaffoldkey.currentState!.context,
         Colors.red,
+        Splashscreenscaffoldkey.currentState!.context,
       );
       controller.services.connectioncheck();
     }

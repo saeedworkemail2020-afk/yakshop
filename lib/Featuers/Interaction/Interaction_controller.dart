@@ -8,7 +8,7 @@ class InteractionController {
   late ScreenSize _screenSize;
   late InteractionModel _model;
   late Interactionservices _services;
-  late SnackbarModel _snackbarModel;
+  late SnackbarModel _snackBar;
 
   InteractionController() {
     _screenSize = ScreenSize();
@@ -18,12 +18,12 @@ class InteractionController {
       baseherdUri: ServiceConfig.baseherdUri,
       baseorderUri: ServiceConfig.baseorderUri,
       baseloadUri: ServiceConfig.baseloadUri,
-      scaffoldkey: _model.interactionscaffoldkey,
+      scaffoldkey: model.interactionscaffoldkey,
     );
-    _snackbarModel = SnackbarModel();
+    _snackBar = SnackbarModel();
   }
   ScreenSize get screenSize => _screenSize;
   InteractionModel get model => _model;
   Interactionservices get services => _services;
-  SnackbarModel get snackBar => _snackbarModel;
+  SnackbarModel get snackBar => _snackBar;
 }

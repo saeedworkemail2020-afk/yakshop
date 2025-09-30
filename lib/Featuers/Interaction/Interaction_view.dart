@@ -59,8 +59,9 @@ class _InteractionViewState extends State<InteractionView> {
                         elevation: WidgetStateProperty.all(5),
                       ),
                       onPressed: () {
-                        controller.services.getstock(
+                        controller.services.getdata(
                           days: model.getamoundtext.text,
+                          what: 'stock',
                         );
                       },
                       child: Text(
@@ -412,8 +413,9 @@ class _InteractionViewState extends State<InteractionView> {
                       elevation: WidgetStateProperty.all(5),
                     ),
                     onPressed: () {
-                      controller.services.getherd(
-                        days: model.getyakslisttext.text,
+                      controller.services.getdata(
+                        days: model.getamoundtext.text,
+                        what: 'herd',
                       );
                     },
                     child: Text(

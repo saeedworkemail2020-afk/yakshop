@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class InteractionModel extends GetxController {
   late GlobalKey<ScaffoldState> interactionscaffoldkey;
 
-  late GlobalKey<FormState> interactionformkey;
   late TextEditingController milktext;
   late TextEditingController skintext;
   late TextEditingController nametext;
@@ -20,7 +19,6 @@ class InteractionModel extends GetxController {
   InteractionModel() {
     interactionscaffoldkey = GlobalKey<ScaffoldState>();
 
-    interactionformkey = GlobalKey<FormState>();
     milktext = TextEditingController();
     skintext = TextEditingController();
     nametext = TextEditingController();

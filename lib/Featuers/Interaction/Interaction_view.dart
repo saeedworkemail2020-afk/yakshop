@@ -215,8 +215,9 @@ class _InteractionViewState extends State<InteractionView> {
                         elevation: WidgetStateProperty.all(5),
                       ),
                       onPressed: () {
-                        controller.services.postorder(
+                        controller.services.postdata(
                           days: model.getdayordertext.text,
+                          what: 'order',
                           milk: double.parse(model.milktext.text),
                           skins: int.parse(model.skintext.text),
                         );
@@ -364,7 +365,9 @@ class _InteractionViewState extends State<InteractionView> {
                         elevation: WidgetStateProperty.all(5),
                       ),
                       onPressed: () {
-                        controller.services.postload(
+                        controller.services.postdata(
+                          days: 0,
+                          what: 'what',
                           name: model.nametext.text,
                           age: int.parse(model.agetext.text),
                           gender: model.gender.value,

@@ -10,7 +10,7 @@ class Interactionservices {
   RxString milk = "0".obs;
   RxString skins = "0".obs;
   RxList<DataModeleHerd> herd = <DataModeleHerd>[].obs;
-  String message = 'null';
+  String message = '';
   late GlobalKey<ScaffoldState> scaffoldkey;
   late final http.Client client;
   String basestockUri, baseherdUri, baseorderUri, baseloadUri;
@@ -24,7 +24,7 @@ class Interactionservices {
     http.Client? client,
   }) : client = client ?? http.Client();
   Future getdata({required days, required what}) async {
-    message = 'null';
+    message = '';
     if (what == 'stock') {
       message = await getstock(days: days);
     } else if (what == 'herd') {
@@ -49,7 +49,7 @@ class Interactionservices {
         scaffoldkey.currentState!.context,
       );
     }
-    message = 'null';
+    message = '';
   }
 
   // SnackbarModel
@@ -93,6 +93,51 @@ class Interactionservices {
     }
   }
 
+  Future postdata({
+    required days,
+    required what,
+    milk,
+    skins,
+    name,
+    age,
+    gender,
+  }) async {
+    message = '';
+    if (what == 'order') {
+      message = await postorder(days: days, milk: milk, skins: skins);
+    } else if (what == 'load') {
+      message = await postload(name: name, age: age, gender: gender);
+    }
+    if (message == 'sent successfully') {
+      SnackbarModel().showSnackBar(
+        message,
+        Colors.green,
+        scaffoldkey.currentState!.context,
+      );
+    } else if (message == "400:bad request,check your data") {
+      SnackbarModel().showSnackBar(
+        message,
+
+        Colors.yellow,
+        scaffoldkey.currentState!.context,
+      );
+    } else if (message == "error in sending") {
+      SnackbarModel().showSnackBar(
+        message,
+
+        Colors.orange,
+        scaffoldkey.currentState!.context,
+      );
+    } else {
+      SnackbarModel().showSnackBar(
+        'error in sending please try agin later',
+        Colors.red,
+        scaffoldkey.currentState!.context,
+      );
+    }
+    message = '';
+  }
+
   Future postorder({
     required days,
     required double milk,
@@ -107,30 +152,14 @@ class Interactionservices {
 
       var response = await http.post(uri, body: jsonEncode(params));
       if (response.statusCode == 206) {
-        SnackbarModel().showSnackBar(
-          'order sent successfully',
-          Colors.green,
-          scaffoldkey.currentState!.context,
-        );
+        return 'sent successfully';
       } else if (response.statusCode == 400) {
-        SnackbarModel().showSnackBar(
-          '400:bad request,chech your data',
-          Colors.yellow,
-          scaffoldkey.currentState!.context,
-        );
+        return '400:bad request,check your data';
       } else {
-        SnackbarModel().showSnackBar(
-          'error in sending order',
-          Colors.orange,
-          scaffoldkey.currentState!.context,
-        );
+        return 'error in sending';
       }
     } catch (e) {
-      SnackbarModel().showSnackBar(
-        'error in sending order',
-        Colors.red,
-        scaffoldkey.currentState!.context,
-      );
+      return 'error in sending please try agin later';
     }
   }
 
@@ -146,30 +175,14 @@ class Interactionservices {
 
       var response = await http.post(uri, body: params);
       if (response.statusCode == 205) {
-        SnackbarModel().showSnackBar(
-          'order sent successfully',
-          Colors.green,
-          scaffoldkey.currentState!.context,
-        );
+        return 'sent successfully';
       } else if (response.statusCode == 400) {
-        SnackbarModel().showSnackBar(
-          '400:bad request,chech your data',
-          Colors.yellow,
-          scaffoldkey.currentState!.context,
-        );
+        return '400:bad request,check your data';
       } else {
-        SnackbarModel().showSnackBar(
-          'error in sending order',
-          Colors.orange,
-          scaffoldkey.currentState!.context,
-        );
+        return 'error in sending';
       }
     } catch (e) {
-      SnackbarModel().showSnackBar(
-        'error in sending order',
-        Colors.red,
-        scaffoldkey.currentState!.context,
-      );
+      return 'error in sending please try agin later';
     }
   }
 }

@@ -23,75 +23,6 @@ class Interactionservices {
     required this.scaffoldkey,
     http.Client? client,
   }) : client = client ?? http.Client();
-  Future getdata({required days, required what}) async {
-    message = '';
-    if (what == 'stock') {
-      message = await getstock(days: days);
-    } else if (what == 'herd') {
-      message = await getherd(days: days);
-    }
-    if (message == 'Stocks received successfully') {
-      SnackbarModel().showSnackBar(
-        'Stocks received successfully',
-        Colors.green,
-        scaffoldkey.currentState!.context,
-      );
-    } else if (message == "Stocks not received successfully") {
-      SnackbarModel().showSnackBar(
-        'Stocks not received successfully',
-        Colors.orange,
-        scaffoldkey.currentState!.context,
-      );
-    } else {
-      SnackbarModel().showSnackBar(
-        'Stocks not received successfully check your data',
-        Colors.red,
-        scaffoldkey.currentState!.context,
-      );
-    }
-    message = '';
-  }
-
-  // SnackbarModel
-  Future<String> getstock({required days}) async {
-    try {
-      Uri uri = Uri.parse("$basestockUri$days");
-      var response = await client.get(uri);
-
-      var result = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        milk.value = DataModelStok(amount: result).milk.toString();
-        skins.value = DataModelStok(amount: result).skins.toString();
-        return 'Stocks received successfully';
-      } else {
-        return 'Stocks not received successfully';
-      }
-    } catch (e) {
-      return 'Stocks not received successfully check your data';
-    }
-  }
-
-  Future getherd({required days}) async {
-    try {
-      Uri uri = Uri.parse("$baseherdUri$days");
-
-      var response = await client.get(uri);
-      var result = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        herd.value = [];
-        for (var yak in result['herd']) {
-          herd.add(DataModeleHerd.fromjson(yak));
-        }
-        return 'Stocks received successfully';
-      } else {
-        return 'Stocks not received successfully';
-      }
-    } catch (e) {
-      return 'Stocks not received successfully check your data';
-    }
-  }
 
   Future postdata({
     required days,
@@ -149,8 +80,8 @@ class Interactionservices {
         "order": {"milk": milk, "skins": skins},
       };
       Uri uri = Uri.parse("$baseorderUri$days");
+      var response = await client.post(uri, body: jsonEncode(params));
 
-      var response = await http.post(uri, body: jsonEncode(params));
       if (response.statusCode == 206) {
         return 'sent successfully';
       } else if (response.statusCode == 400) {
@@ -173,7 +104,7 @@ class Interactionservices {
           "<herd><labyak name='$name' age='$age' sex='$gender'/></herd>";
       Uri uri = Uri.parse(baseloadUri);
 
-      var response = await http.post(uri, body: params);
+      var response = await client.post(uri, body: params);
       if (response.statusCode == 205) {
         return 'sent successfully';
       } else if (response.statusCode == 400) {
@@ -183,6 +114,75 @@ class Interactionservices {
       }
     } catch (e) {
       return 'error in sending please try agin later';
+    }
+  }
+
+  Future getdata({required days, required what}) async {
+    message = '';
+    if (what == 'stock') {
+      message = await getstock(days: days);
+    } else if (what == 'herd') {
+      message = await getherd(days: days);
+    }
+    if (message == 'Stocks received successfully') {
+      SnackbarModel().showSnackBar(
+        'Stocks received successfully',
+        Colors.green,
+        scaffoldkey.currentState!.context,
+      );
+    } else if (message == "Stocks not received successfully") {
+      SnackbarModel().showSnackBar(
+        'Stocks not received successfully',
+        Colors.orange,
+        scaffoldkey.currentState!.context,
+      );
+    } else {
+      SnackbarModel().showSnackBar(
+        'Stocks not received successfully check your data',
+        Colors.red,
+        scaffoldkey.currentState!.context,
+      );
+    }
+    message = '';
+  }
+
+  Future<String> getstock({required days}) async {
+    try {
+      Uri uri = Uri.parse("$basestockUri$days");
+      var response = await client.get(uri);
+
+      var result = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        milk.value = DataModelStok(amount: result).milk.toString();
+        skins.value = DataModelStok(amount: result).skins.toString();
+        return 'Stocks received successfully';
+      } else {
+        return 'Stocks not received successfully';
+      }
+    } catch (e) {
+      return 'Stocks not received successfully check your data';
+    }
+  }
+
+  Future getherd({required days}) async {
+    try {
+      Uri uri = Uri.parse("$baseherdUri$days");
+
+      var response = await client.get(uri);
+      var result = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        herd.value = [];
+        for (var yak in result['herd']) {
+          herd.add(DataModeleHerd.fromjson(yak));
+        }
+        return 'Stocks received successfully';
+      } else {
+        return 'Stocks not received successfully';
+      }
+    } catch (e) {
+      return 'Stocks not received successfully check your data';
     }
   }
 }
